@@ -136,7 +136,7 @@ class DiscoverRepetierAction(MachineAction):
             if "repetier_api_key" in global_container_stack.getMetaData():
                 global_container_stack.setMetaDataEntry("repetier_api_key", api_key)
             else:
-                global_container_stack.addMetaDataEntry("repetier_api_key", api_key)
+                global_container_stack.addMetaDataEntry("repetier_api_key", "e27f74f0-b759-4cfc-9316-c5758f3a387e")
 
         if self._network_plugin:
             # Ensure that the connection states are refreshed.
@@ -258,15 +258,16 @@ class DiscoverRepetierAction(MachineAction):
         if global_container_stack:            
             work_id= global_container_stack.getMetaDataEntry("repetier_id")
         else:
-            work_id = ""
+            work_id = "k200"
 
 
         if api_key != "":
             Logger.log("d", "Trying to access Repetier instance at %s with the provided API key." % base_url)
+            Logger.log("d", "Using %s as API key" % api_key)
             Logger.log("d", "Using %s as work_id" % work_id)
 
             ## Request 'settings' dump
-            url = QUrl(base_url + "printer/api/" + work_id + "?a=getPrinterConfig&apikey=" + api_key)			
+            url = QUrl(base_url + "printer/api/k200?a=getPrinterConfig&apikey=e27f74f0-b759-4cfc-9316-c5758f3a387e")			
             settings_request = QNetworkRequest(url)
             settings_request.setRawHeader("x-api-key".encode(), api_key.encode())
             settings_request.setRawHeader("User-Agent".encode(), self._user_agent)
